@@ -6,6 +6,8 @@ import SupabaseProivder from "@/providers/SupabaseProviders";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
+import getSongsByUserId from "@/actions/getSongsByUserId";
+import Player from "./components/Player";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -14,11 +16,12 @@ export const metadata: Metadata = {
   description: "Listen Scum's hottest shits!",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const userSongs = await getSongsByUserId();
   return (
     <html lang="en">
       <body className={font.className}>
@@ -26,9 +29,10 @@ export default function RootLayout({
         <SupabaseProivder>
           <UserProvider>
             <ModalProvider/>
-              <Sidebar>
+              <Sidebar songs={userSongs}>
                 {children}
               </Sidebar>
+              <Player />
             </UserProvider>
         </SupabaseProivder>
       </body>
