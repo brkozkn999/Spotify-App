@@ -1,9 +1,10 @@
 'use client'
 import qs from 'query-string';
 import useDebounce from "@/hooks/useDebounce";
+import Input from './Input';
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import Input from './Input';
+import { BiSearch } from 'react-icons/bi';
 
 const SearchInput = () => {
     const router = useRouter();
@@ -24,8 +25,12 @@ const SearchInput = () => {
     }, [debouncedValue, router])
 
     return (
-        <Input placeholder='What do you want to listen to ?' value={value}
-            onChange={(e) => setValue(e.target.value)} />
+        <Input 
+            placeholder='What do you want to play?' 
+            value={value}
+            onChange={(e) => setValue(e.target.value)} 
+            icon={<BiSearch size={25} />}
+        />
     )
 };
 

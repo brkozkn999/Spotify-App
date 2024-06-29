@@ -11,21 +11,23 @@ import useOnPlay from "@/hooks/useOnPlay";
 
 interface LibraryProps {
     songs: Song[];
+    permission: string;
 }
 
-const Library: React.FC<LibraryProps> = ({ songs }) => {
+const Library: React.FC<LibraryProps> = ({ songs, permission }) => {
     const authModal = useAuthModal();
     const uploadModal = useUploadModal();
     const { user } = useUser();
     const onPlay = useOnPlay(songs);
 
     const onClick = () => {
-        if (!user) {
+        if (!user)
             return authModal.onOpen();
-        }
 
         return uploadModal.onOpen();
     };
+
+    console.log(permission);
 
     return (
         <div className="flex flex-col">
@@ -36,7 +38,13 @@ const Library: React.FC<LibraryProps> = ({ songs }) => {
                         Your Library
                     </p>
                 </div>
-                <AiOutlinePlus onClick={onClick} size={20} className="text-neutral-400 cursor-pointer hover:text-white transition active:rotate-45"/>
+                {permission === 'admin' && (
+                    <AiOutlinePlus
+                        onClick={onClick}
+                        size={20}
+                        className="text-neutral-400 cursor-pointer hover:text-white transition active:rotate-45"
+                    />
+                )}
             </div>
             <div className="flex flex-col gap-y-2 mt-4 px-3">
                 {songs.map((item) => (

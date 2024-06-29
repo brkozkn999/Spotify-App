@@ -49,10 +49,10 @@ const Header: React.FC<HeaderProps> = ({ children, classname }) => {
                 </div>
                 <div className="flex md:hidden gap-x-2 items-center">
                     <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
-                        <HiHome className="text-black" size={20} />
+                        <HiHome onClick={() => router.push('/')} className="text-black" size={20} />
                     </button>
                     <button className="rounded-full p-2 bg-white flex items-center justify-center hover:opacity-75 transition">
-                        <BiSearch className="text-black" size={20} />
+                        <BiSearch onClick={() => router.push('/search')} className="text-black" size={20} />
                     </button>
                 </div>
                 <div className="flex justify-between items-center gap-x-4">
@@ -61,17 +61,16 @@ const Header: React.FC<HeaderProps> = ({ children, classname }) => {
                             <Button onClick={handleLogout} className="bg-white px-6 py-2">
                                 Logout
                             </Button>
-                            <Button onClick={() => router.push('/account')}>
-                                <FaUserAlt />
-                            </Button>
+                            {
+                                /*
+                                <Button onClick={() => router.push('/account')}>
+                                    <FaUserAlt />
+                                </Button>
+                                 */
+                            }
                         </div>
                     ) : (
                         <>
-                            <div>
-                                <Button className="bg-transparent text-neutral-300 font-medium" onClick={authModal.onOpen}>
-                                    Sign Up
-                                </Button>
-                            </div>
                             <div>
                                 <Button className="bg-white px-6 py-2" onClick={authModal.onOpen}>
                                     Log in

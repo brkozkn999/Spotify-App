@@ -6,8 +6,9 @@ import SupabaseProivder from "@/providers/SupabaseProviders";
 import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
-import getSongsByUserId from "@/actions/getSongsByUserId";
 import Player from "./components/Player";
+import getLikedSongs from "@/actions/getLikedSongs";
+import getPermissionByUserId from "@/actions/getPermission";
 
 const font = Figtree({ subsets: ["latin"] });
 
@@ -21,19 +22,21 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const userSongs = await getSongsByUserId();
+  const userPermission = await getPermissionByUserId();
+  const likedSongs = await getLikedSongs();
+
   return (
     <html lang="en">
       <body className={font.className}>
         <ToasterProvider />
         <SupabaseProivder>
           <UserProvider>
-            <ModalProvider/>
-              <Sidebar songs={userSongs}>
-                {children}
-              </Sidebar>
-              <Player />
-            </UserProvider>
+            <ModalProvider />
+            <Sidebar songs={likedSongs} permission={userPermission}>
+              {children}
+            </Sidebar>
+            <Player />
+          </UserProvider>
         </SupabaseProivder>
       </body>
     </html>

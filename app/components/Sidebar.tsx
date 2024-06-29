@@ -1,5 +1,4 @@
 'use client'
-
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
@@ -13,10 +12,11 @@ import { twMerge } from "tailwind-merge";
 
 interface SidebarProps {
     children: React.ReactNode;
-    songs: Song[]
+    songs: Song[];
+    permission: string;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
+const Sidebar: React.FC<SidebarProps> = ({ children, songs, permission }) => {
     const pathname = usePathname();
     const player = usePlayer();
 
@@ -46,7 +46,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children, songs }) => {
                     </div>
                 </Box>
                 <Box classname="overflow-y-auto h-full">
-                    <Library songs={songs} />
+                    <Library songs={songs} permission={permission} />
                 </Box>
             </div>
             <main className="h-full w-full flex overflow-y-auto py-2">
