@@ -27,8 +27,6 @@ const Library: React.FC<LibraryProps> = ({ songs, permission }) => {
         return uploadModal.onOpen();
     };
 
-    console.log(permission);
-
     return (
         <div className="flex flex-col">
             <div className="flex items-center justify-between px-5 pt-4">

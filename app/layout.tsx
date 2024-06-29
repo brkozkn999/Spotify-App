@@ -13,8 +13,11 @@ import getPermissionByUserId from "@/actions/getPermission";
 const font = Figtree({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Scum AUDIOS",
-  description: "Listen Scum's hottest shits!",
+  title: "Nasheedify",
+  description: "Listen Your Favorite Nasheed Uncensored!",
+  icons: {
+    icon: '/favicon.png',
+  },
 };
 
 export default async function RootLayout({
